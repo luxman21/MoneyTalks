@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         readCsv(this);
         iterateList();
     }
+    //takes all data from file
     public void readCsv(Context context) {
         ArrayList<String[]> questionList = new ArrayList<String[]>();
         AssetManager assetManager = context.getAssets();
@@ -55,26 +56,34 @@ public class MainActivity extends AppCompatActivity {
         String[] strings;
         double amount;
         BigInteger customerNumberData;
+        //loops through every line of data
         for(int i = 0; i < lines.size(); i++){
             strings = lines.get(i);
             customerNumberData = new BigInteger(strings[0]);
             amount = Double.parseDouble(strings[2]);
+            //checks if we should continue with the same customer or change
             if(customerNumberData.compareTo(currentCustomerNumber)!=0){
                 Log.d("Code starts", "pls");
+                //checks if it's the first customer or not, if not calculate percentages appropriately, then calculate personality percentages from this.
                 if(currentCustomer != null){
                 currentCustomer.calculatePercentages();
                 currentCustomer.printPercentages();
+                currentCustomer.setPersonalityNumbers();
                 }
+                //changes customer number to check, we've moved on to the next customer.
                 currentCustomerNumber = customerNumberData;
+                //makes new customer with new customer number.
                 currentCustomer = new Customer(currentCustomerNumber);
+                //adds customer to the arraylist
                 customers.add(currentCustomer);
             }
-
+            //checks money transferred is negative so income is not considered
             if(amount < 0){
                 currentCustomer.calculateTotals(amount, strings[3]);
 
             }
         }
+        //when iteration is done, calculate for last customer.
         currentCustomer.calculatePercentages();
         currentCustomer.printPercentages();
         currentCustomer.setPersonalityNumbers();

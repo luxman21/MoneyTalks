@@ -27,6 +27,7 @@ public class Customer {
         customerNumber = number;
         initialiseTotals();
     }
+    // sets all values to 0 so they can be incremented later.
     public void initialiseTotals(){
         totalAmount = 0;
         charityTotal = 0;
@@ -51,6 +52,7 @@ public class Customer {
         adventurousNumber = 0;
     }
 
+    // checks the tags and increments the appropriate total money.
     public void calculateTotals(double tableAmount, String tag){
         double positive = tableAmount * -1;
 
@@ -89,6 +91,7 @@ public class Customer {
         }
     }
 
+    //calculates the percentage spent for each tag
     public void calculatePercentages(){
         charityPercentage = (charityTotal/totalAmount) * 100;
         clothingPercentage = (clothingTotal/totalAmount) * 100;
@@ -106,9 +109,11 @@ public class Customer {
         transportPercentage = (transportTotal/totalAmount) * 100;
         /*waterPercentage = (waterTotal/totalAmount) * 100;*/
     }
+    //testing method, prints things
     public void printPercentages(){
         Log.d("Charity: ",""+charityPercentage);
     }
+    //Calculates the personality percentages using appropriate values from each tag.
     public void setPersonalityNumbers(){
         socialNumber = 0.2*charityPercentage + 0.2*clothingPercentage + 0.6*entertainmentPercentage + 0.5*mobilePercentage + 0.3*transportPercentage;
         kindNumber = 0.8*charityPercentage + 0.6*savingsPercentage;
