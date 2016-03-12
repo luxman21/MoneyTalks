@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         }
         currentCustomer.calculatePercentages();
         currentCustomer.printPercentages();
+        currentCustomer.setPersonalityNumbers();
     }
 
 
