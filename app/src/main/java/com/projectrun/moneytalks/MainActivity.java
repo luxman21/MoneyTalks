@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     public final List<String[]> readCsv(Context context) {
         List<String[]> questionList = new ArrayList<String[]>();
         AssetManager assetManager = context.getAssets();
-
         try {
             InputStream csvStream = assetManager.open("NationwideData.csv");
             InputStreamReader csvStreamReader = new InputStreamReader(csvStream);
