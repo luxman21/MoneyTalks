@@ -130,6 +130,11 @@ public class Customer {
 
 
     }
+
+    public BigInteger getCustomerNumber () {
+       return customerNumber;
+    }
+
     public double getKindNumber() {
         return kindNumber;
     }
