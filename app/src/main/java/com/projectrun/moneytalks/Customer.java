@@ -94,4 +94,8 @@ public class Customer {
     public void printPercentages(){
         Log.d("Charity: ",""+charityPercentage);
     }
+
+    public BigInteger getCustomerNumber () {
+        return customerNumber;
+    }
 }
