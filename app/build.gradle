@@ -1,8 +1,15 @@
+
+
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    dexOptions {
+        incremental = true;
+        preDexLibraries = false
+        javaMaxHeapSize "4g" // 2g should be also OK
+    }
 
     defaultConfig {
         applicationId "com.projectrun.moneytalks"
