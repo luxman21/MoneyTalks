@@ -2,9 +2,13 @@ package com.projectrun.moneytalks;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.opencsv.CSVReader;
 
@@ -18,17 +22,42 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String[]> lines;
     private BigInteger currentCustomerNumber;
     private ArrayList<Customer> customers;
+    private ArrayAdapter<BigInteger> adapter;
+    public ArrayList<BigInteger> customerReference;
     private Customer currentCustomer;
+    public ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         currentCustomerNumber = new BigInteger("0");
         customers = new ArrayList<Customer>();
         readCsv(this);
         iterateList();
+
+        customerReference = new ArrayList<>();
+        getCustomerReference();
+        listView = (ListView)findViewById(R.id.left_drawer);
+        adapter = new ArrayAdapter<BigInteger>(this, R.layout.list_row , R.id.customerReferenceList , customerReference);
+        listView.setAdapter(adapter);
+
+
     }
+
+    // method to add customer reference into the array
+    public void getCustomerReference () {
+        if(customers.size() != 0 ) {
+            for ( int i = 0 ; i < customers.size() ; i++ ) {
+
+                customerReference.add(customers.get(i).getCustomerNumber());
+            }
+        }
+    }
+
+
     //takes all data from file
     public void readCsv(Context context) {
         ArrayList<String[]> questionList = new ArrayList<String[]>();
