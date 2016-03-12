@@ -11,7 +11,14 @@ public class Customer {
     private double totalAmount,charityTotal,clothingTotal,creditRepaymentTotal,debtTotal,entertainmentTotal, foodTotal,gasTotal,healthCareTotal,housingTotal,insuranceTotal,mobileTotal,salaryTotal,savingsTotal,transportTotal,waterTotal;
     private BigInteger customerNumber;
     private double charityPercentage,clothingPercentage,creditPercentage,debtPercentage,entertainmentPercentage, foodPercentage,gasPercentage,healthCarePercentage,housingPercentage,insurancePercentage,mobilePercentage,salaryPercentage,savingsPercentage,transportPercentage,waterPercentage;
-    private double socialNumber,foodLoverNumber,materialisticNumber,adventurousNumber,kindNumber;
+    private double socialNumber;
+    private double foodLoverNumber;
+    private double materialisticNumber;
+    private double adventurousNumber;
+
+
+
+    private double kindNumber;
     private double other;
     private double diff;
 
@@ -114,8 +121,27 @@ public class Customer {
         materialisticNumber += diff;
         foodLoverNumber += diff;
         adventurousNumber += diff;
-        System.out.println(socialNumber+kindNumber+materialisticNumber+foodLoverNumber+adventurousNumber);
+        System.out.println(socialNumber + kindNumber + materialisticNumber + foodLoverNumber + adventurousNumber);
 
 
+    }
+    public double getKindNumber() {
+        return kindNumber;
+    }
+
+    public double getAdventurousNumber() {
+        return adventurousNumber;
+    }
+
+    public double getMaterialisticNumber() {
+        return materialisticNumber;
+    }
+
+    public double getFoodLoverNumber() {
+        return foodLoverNumber;
+    }
+
+    public double getSocialNumber() {
+        return socialNumber;
     }
 }
