@@ -11,14 +11,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.opencsv.CSVReader;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<BigInteger> customerReference;
     private Customer currentCustomer;
     public ListView listView;
+    private TextView p1Text,p1Percentage,p2Text,p2Percentage,p3Text,p3Percentage,p4Text,p4Percentage,p5Text,p5Percentage;
     ScrollView scrollView;
 
     @Override
@@ -52,10 +57,20 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<BigInteger>(this, R.layout.list_row , R.id.customerReferenceList , customerReference);
         listView.setAdapter(adapter);
         listView.bringToFront();
+        initialiseTextViews();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("its pressing" , "LOOL");
+                Customer c = customers.get(position);
+
+                String[] customerPersonalities = c.getPersonalityOrder();
+                Double[] customerPersonalityNumbers = c.getPersonalityPercentages();
+                TextView[] stringTextViews = {p1Text,p2Text,p3Text,p4Text,p5Text};
+                TextView[] percentTextViews = {p1Percentage,p2Percentage,p3Percentage,p4Percentage,p5Percentage};
+                for(int i = 0; i < 5; i++){
+                    stringTextViews[i].setText(customerPersonalities[i]);
+                    percentTextViews[i].setText(String.valueOf(customerPersonalityNumbers[i]+"%"));
+                }
             }
         });
     }
@@ -129,7 +144,16 @@ public class MainActivity extends AppCompatActivity {
         currentCustomer.printPercentages();
         currentCustomer.setPersonalityNumbers();
     }
-
-
-
+    public void initialiseTextViews(){
+    p1Percentage = (TextView) findViewById(R.id.personalitynumber1);
+    p1Text = (TextView) findViewById(R.id.personality1);
+    p2Percentage = (TextView) findViewById(R.id.personalitynumber2);
+    p2Text = (TextView) findViewById(R.id.personality2);
+    p3Percentage = (TextView) findViewById(R.id.personalitynumber3);
+    p3Text = (TextView) findViewById(R.id.personality3);
+    p4Percentage = (TextView) findViewById(R.id.personalitynumber4);
+    p4Text = (TextView) findViewById(R.id.personality4);
+    p5Percentage = (TextView) findViewById(R.id.personalitynumber5);
+    p5Text = (TextView) findViewById(R.id.personality5);
+    }
 }

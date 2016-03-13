@@ -3,6 +3,7 @@ package com.projectrun.moneytalks;
 import android.util.Log;
 
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 
 /**
  * Created by M on 12/03/2016.
@@ -19,8 +20,10 @@ public class Customer {
 
 
     private double kindNumber;
-    private double other;
     private double diff;
+
+    private Double[] personalities;
+    private String[] personalityTexts;
 
 
     public Customer(BigInteger number){
@@ -153,5 +156,29 @@ public class Customer {
 
     public double getSocialNumber() {
         return socialNumber;
+    }
+
+    public String[] getPersonalityOrder(){
+        personalities = new Double[]{kindNumber, adventurousNumber, materialisticNumber, foodLoverNumber, socialNumber};
+        personalityTexts = new String[]{"Kind", "Adventurous", "Materialistic", "Food Lover", "Social"};
+        for(int i = 0;i < 4;i++)
+        for(int j = 1;j < 5;j++){
+            if(personalities[j] > personalities[i]){
+                Double temp = personalities[j];
+                personalities[j] = personalities[i];
+                personalities[i] = temp;
+                String tempS = personalityTexts[j];
+                personalityTexts[j] = personalityTexts[i];
+                personalityTexts[i] = tempS;
+            }
+        }
+        return personalityTexts;
+    }
+    public Double[] getPersonalityPercentages(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        for(int i = 0; i<personalities.length;i++){
+            personalities[i] = Double.valueOf(df.format(personalities[i]));
+        }
+        return personalities;
     }
 }
