@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         customers = new ArrayList<Customer>();
         readCsv(this);
         iterateList();
-        //setting the scrollview to invisible at the beginning of the activity
-        //scrollView = (ScrollView)findViewById(R.id.scrollviewContainer);
-       // scrollView.setVisibility(View.INVISIBLE);
+       // setting the scrollview to invisible at the beginning of the activity
+        scrollView = (ScrollView)findViewById(R.id.scrollviewContainer);
+        scrollView.setVisibility(View.INVISIBLE);
 
         customerReference = new ArrayList<>();
         getCustomerReference();
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Customer c = customers.get(position);
-
+                scrollView.setVisibility(View.VISIBLE);
                 String[] customerPersonalities = c.getPersonalityOrder();
                 Double[] customerPersonalityNumbers = c.getPersonalityPercentages();
                 TextView[] stringTextViews = {p1Text,p2Text,p3Text,p4Text,p5Text};
