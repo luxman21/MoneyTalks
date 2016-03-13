@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.opencsv.CSVReader;
 
@@ -23,10 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private BigInteger currentCustomerNumber;
     private ArrayList<Customer> customers;
     private ArrayAdapter<BigInteger> adapter;
+    private DrawerLayout drawerLayout;
     public ArrayList<BigInteger> customerReference;
     private Customer currentCustomer;
     public ListView listView;
-
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +41,23 @@ public class MainActivity extends AppCompatActivity {
         customers = new ArrayList<Customer>();
         readCsv(this);
         iterateList();
+        //setting the scrollview to invisible at the beginning of the activity
+        //scrollView = (ScrollView)findViewById(R.id.scrollviewContainer);
+       // scrollView.setVisibility(View.INVISIBLE);
 
         customerReference = new ArrayList<>();
         getCustomerReference();
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         listView = (ListView)findViewById(R.id.left_drawer);
         adapter = new ArrayAdapter<BigInteger>(this, R.layout.list_row , R.id.customerReferenceList , customerReference);
         listView.setAdapter(adapter);
-
-
+        listView.bringToFront();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("its pressing" , "LOOL");
+            }
+        });
     }
 
     // method to add customer reference into the array
@@ -73,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
             while ((line = csvReader.readNext()) != null) {
                 questionList.add(line);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -117,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         currentCustomer.printPercentages();
         currentCustomer.setPersonalityNumbers();
     }
+
 
 
 }

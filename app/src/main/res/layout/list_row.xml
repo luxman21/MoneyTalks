@@ -7,8 +7,9 @@
         android:layout_width="match_parent"
         android:textColor="#f4F4f4"
         android:layout_gravity="center"
+        android:background="#626262"
         android:textAlignment="center"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/customerReferenceList"
         />
 
